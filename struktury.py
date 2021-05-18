@@ -3,6 +3,8 @@ from datetime import date, datetime
 import csv
 from csv import writer
 import array as arr
+import sys
+sys.setrecursionlimit(99999)
 
 startTimeFull = datetime.now()
 
@@ -310,7 +312,7 @@ def generateconst():
 
 generateconst()
 
-"""
+
 print('ARRAY')
 # array dodawanie (tworzenie)
 def arrayAdd(listy, tablisty, typ):
@@ -320,12 +322,10 @@ def arrayAdd(listy, tablisty, typ):
     time =  datetime.now() - startTime
     print(typ, len(a), time)
 
-
 # losowe
 for a in randomtabllisty:
     arrayAdd(randomlisty, randomtabllisty, "Losowe")
 print("")
-
 
 # rosnące
 for a in ascendingtablisty:
@@ -351,7 +351,6 @@ print("")
 for a in consttablisty:
     arrayAdd(constlisty, consttablisty, "Stale")
 print("")
-
 
 
 
@@ -399,6 +398,7 @@ print("")
 
 
 
+
 # foreach
 def forEach(a, typ):
     startTime = datetime.now()
@@ -406,6 +406,7 @@ def forEach(a, typ):
         x += 1
     time =  datetime.now() - startTime
     print(typ, len(a), time)
+
 
 # losowe
 for a in randomtabllisty:
@@ -439,8 +440,6 @@ print("")
 
 
 
-
-
 # array odejmowanie (usuwanie)
 def removeTab(a, typ):
     dlugosc = len(a)
@@ -450,6 +449,7 @@ def removeTab(a, typ):
             a.remove(x)
     time =  datetime.now() - startTime
     print(typ, dlugosc, time)
+
 
 # losowe
 for a in randomtabllisty:
@@ -479,15 +479,12 @@ print("")
 # stałe
 for a in consttablisty:
     removeTab(a, 'Stale')
+
+
+
+
+
 print("")
-
-
-
-
-
-
-
-
 clear()
 print('LINKED LIST')
 
@@ -496,7 +493,6 @@ class Node:
     def __init__(self, value, nextNode=None):
         self.value = value
         self.nextNode = nextNode
-
 class linkedList:
     def __init__(self, head=None):
         self.head = head
@@ -513,7 +509,6 @@ class linkedList:
                 currentNode.nextNode = node
                 break
             currentNode = currentNode.nextNode
-
     def forList(self):
         currentNode = self.head
         while currentNode is not None:
@@ -526,15 +521,12 @@ class linkedList:
             if currentNode.value == value:
                 break
             currentNode = currentNode.nextNode
-
     def remove(self):
         currentNode = self.head
         while currentNode is not None:
             if currentNode.value:
                 currentNode.value = None
             currentNode = currentNode.nextNode
-
-
 
 
 # puste losowe listy jednostronne
@@ -616,8 +608,6 @@ vlllisty = [vll2000, vll4000, vll6000, vll8000, vll10000, vll12000, vll14000, vl
 alllisty = [all2000, all4000, all6000, all8000, all10000, all12000, all14000, all16000, all18000, all20000]
 constlllisty = [constll2000, constll4000, constll6000, constll8000, constll10000, constll12000, constll14000, constll16000, constll18000, constll20000]
 
-
-
 # dodawanie do listy jednostronnej (tworzenie)
 def createLL(a, listy, lllisty, typ):
     startTime = datetime.now()
@@ -631,7 +621,6 @@ def createLL(a, listy, lllisty, typ):
 for a in randomlllisty:
     createLL(a, randomlisty, randomlllisty, 'Losowe')
 print("")
-
 
 # rosnące
 for a in ascendinglllisty:
@@ -660,15 +649,13 @@ print("")
 
 
 
-
-
-
 # sprawdzanie czy lista jendokierunkowa zawiera podaną liczbę
 def containsLL(a, listy, llisty, typ):
     startTime = datetime.now()
     a.search(listy[llisty.index(a)][random.randint(0, len(listy[llisty.index(a)]))])
     time =  datetime.now() - startTime
     print(typ,  len(listy[llisty.index(a)]), time)
+
 
 # losowe
 for a in randomlllisty:
@@ -703,13 +690,13 @@ print("")
 
 
 
-
 # foreach
 def forEach(a, listy, llisty, typ):
     startTime = datetime.now()
     a.forList()
     time =  datetime.now() - startTime
     print(typ,  len(listy[llisty.index(a)]), time)
+
 
 # losowe
 for a in randomlllisty:
@@ -742,15 +729,13 @@ for a in constlllisty:
 print("")
 
 
-
-
-
 # lista jednokierunkowa odejmowanie (usuwanie)
 def removeList(a, listy, llisty, typ):
     startTime = datetime.now()
     a.remove()
     time =  datetime.now() - startTime
     print(typ,  len(listy[llisty.index(a)]), time)
+
 
 # losowe
 for a in randomlllisty:
@@ -781,7 +766,8 @@ print("")
 for a in constlllisty:
     removeList(a, constlisty, constlllisty, 'Stale')
 print("")
-"""
+
+
 
 
 
@@ -795,6 +781,7 @@ class Node:
         self.right = None
         self.val = val
 
+    # wprowadza dane do drzewa (dodawanie)
     def insert(self, val):
         if not self.val:
             self.val = val
@@ -814,9 +801,52 @@ class Node:
             self.right.insert(val)
             return
         self.right = Node(val)
-    
-    
 
+    # szuka podanej liczby (szukanie)
+    def search(self, val):
+        if val == self.val:
+            return True
+
+        if val < self.val:
+            if self.left == None:
+                return False
+            return self.left.search(val)
+
+        if self.right == None:
+            return False
+        return self.right.search(val)
+    
+    # dotyka każdą liczbę (forEach)
+    def forEach(self, vals):
+        if self.left is not None:
+            self.left.forEach(vals)
+        if self.val is not None:
+            vals.append(self.val)
+        if self.right is not None:
+            self.right.forEach(vals)
+        return vals
+
+    def delete(self, val):
+        if self == None:
+            return self
+        if val < self.val:
+            if self.left:
+                self.left = self.left.delete(val)
+            return self
+        if val > self.val:
+            if self.right:
+                self.right = self.right.delete(val)
+            return self
+        if self.right == None:
+            return self.left
+        if self.left == None:
+            return self.right
+        min_larger_node = self.right
+        while min_larger_node.left:
+            min_larger_node = min_larger_node.left
+        self.val = min_larger_node.val
+        self.right = self.right.delete(min_larger_node.val)
+        return self
 
 # puste losowe listy jednostronne
 randomtree2000 = Node()
@@ -938,8 +968,6 @@ print("")
 
 
 
-"""
-
 # sprawdzanie czy zawiera daną liczbę
 def containsTree(a, listy, tlisty, typ):
     startTime = datetime.now()
@@ -953,23 +981,104 @@ for a in randomtreelisty:
 print("")
 
 # rosnące
+for a in ascendingtreelisty:
+    containsTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+print("")
 
 # malejące
+for a in descendingtreelisty:
+    containsTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+print("")
 
 # V-kształtne
 for a in vtreelisty:
     containsTree(a, vlisty, vtreelisty, 'V-ksztaltne')
 print("")
-print(v2000)
+
 # A-kształtne
+for a in atreelisty:
+    containsTree(a, vlisty, atreelisty, 'A-ksztaltne')
+print("")
 
 # stałe
 for a in consttreelisty:
     containsTree(a, constlisty, consttreelisty, 'Stale')
 print("")
 
-print(randomtree2000.inorder([]))
-print(randomtree2000.get_max())
-print(randomtree2000.get_min())
-"""
 
+# foreach
+
+def forEachTree(a, listy, tlisty, typ):
+    startTime = datetime.now()
+    a.forEach([])
+    time =  datetime.now() - startTime
+    print(typ, len(listy[tlisty.index(a)]), time)
+
+# losowe
+for a in randomtreelisty:
+    forEachTree(a, randomlisty, randomtreelisty, 'Losowe')
+print("")
+
+# rosnące
+for a in ascendingtreelisty:
+    forEachTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+print("")
+
+# malejące
+for a in descendingtreelisty:
+    forEachTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+print("")
+
+# V-kształtne
+for a in vtreelisty:
+    forEachTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+print("")
+
+# A-kształtne
+for a in atreelisty:
+    forEachTree(a, vlisty, atreelisty, 'A-ksztaltne')
+print("")
+
+# stałe
+for a in consttreelisty:
+    forEachTree(a, constlisty, consttreelisty, 'Stale')
+print("")
+
+
+# odejmowanie (usuwanie)
+def deleteTree(a, listy, tlisty, typ):
+    startTime = datetime.now()
+    for x in listy[tlisty.index(a)]:
+        a.delete(x)
+    time =  datetime.now() - startTime
+    print(typ, len(listy[tlisty.index(a)]), time)
+
+# losowe
+for a in randomtreelisty:
+    deleteTree(a, randomlisty, randomtreelisty, 'Losowe')
+print("")
+
+# rosnące
+for a in ascendingtreelisty:
+    deleteTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+print("")
+
+# malejące
+for a in descendingtreelisty:
+    deleteTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+print("")
+
+# V-kształtne
+for a in vtreelisty:
+    deleteTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+print("")
+
+# A-kształtne
+for a in atreelisty:
+    deleteTree(a, vlisty, atreelisty, 'A-ksztaltne')
+print("")
+
+# stałe
+for a in consttreelisty:
+    deleteTree(a, constlisty, consttreelisty, 'Stale')
+print("")
