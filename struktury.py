@@ -6,12 +6,13 @@ import array as arr
 import sys
 sys.setrecursionlimit(99999)
 
+# pozwala na zmierzenie czasu wykonania całego programu
 startTimeFull = datetime.now()
 
 # towrzymy plik csv z nazwami tabel
 with open("wynikstruktury.csv", 'w') as csvfile:
     csvwriter = csv.writer(csvfile)
-    csvwriter.writerow(['Algorytm', 'Ilość elementów', 'Typ elementów', 'Czas wykonania'])
+    csvwriter.writerow(['Struktura', 'Ilość elementów', 'Typ elementów', 'Operacja', 'Czas wykonania'])
 
 # zakresy liczb
 zakresy = [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000]
@@ -315,170 +316,191 @@ generateconst()
 
 print('ARRAY')
 # array dodawanie (tworzenie)
-def arrayAdd(listy, tablisty, typ):
+def arrayAdd(listy, tablisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     for x in listy[tablisty.index(a)]:
         a.append(x)
     time =  datetime.now() - startTime
+
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(a), sortowanie, operacja, time])
+        f_object.close()
+
     print(typ, len(a), time)
+
 
 # losowe
 for a in randomtabllisty:
-    arrayAdd(randomlisty, randomtabllisty, "Losowe")
+    arrayAdd(randomlisty, randomtabllisty, "Losowe", 'Tablica', 'Losowe', 'Dodawanie')
 print("")
 
 # rosnące
 for a in ascendingtablisty:
-    arrayAdd(ascendinglisty, ascendingtablisty, "Rosnace")
+    arrayAdd(ascendinglisty, ascendingtablisty, "Rosnace", 'Tablica', 'Rosnące', 'Dodawanie')
 print("")
 
 # malejące
 for a in descendingtablisty:
-    arrayAdd(descendinglisty, descendingtablisty, "Malejace")
+    arrayAdd(descendinglisty, descendingtablisty, "Malejace", 'Tablica', 'Malejące', 'Dodawanie')
 print("")
 
 # V-kształtne
 for a in vtablisty:
-    arrayAdd(vlisty, vtablisty, "V-ksztaltne")
+    arrayAdd(vlisty, vtablisty, "V-ksztaltne", 'Tablica', 'V-ształtne', 'Dodawanie')
 print("")
     
 # A-kształtne
 for a in atablisty:
-    arrayAdd(alisty, atablisty, "A-ksztaltne")
+    arrayAdd(alisty, atablisty, "A-ksztaltne", 'Tablica', 'A-kształtne', 'Dodawanie')
 print("")
     
 # stałe
 for a in consttablisty:
-    arrayAdd(constlisty, consttablisty, "Stale")
+    arrayAdd(constlisty, consttablisty, "Stale", 'Tablica', 'Stałe', 'Dodawanie')
 print("")
 
 
 
+
 # array contains
-def contains(typ):
+def contains(typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     randomNumber = a[random.randint(0, len(a))]
     for i in a:
         if i == randomNumber:
             time =  datetime.now() - startTime
+            with open('wynikstruktury.csv', 'a', newline='') as f_object:
+                writer_object = writer(f_object)
+                writer_object.writerow([struktura, len(a), sortowanie, operacja, time])
+                f_object.close()
             print(typ, len(a), time, i)
             break
         else:
             pass
+    
 
 # losowe
 for a in randomtabllisty:
-    contains("Losowe znaleziono")
+    contains("Losowe znaleziono", 'Tablica', 'Losowe', 'Contains')
 print("")
 
 # rosnące
 for a in ascendingtablisty:
-    contains("Rosnace znaleziono")
+    contains("Rosnace znaleziono", 'Tablica', 'Rosnące', 'Contains')
 print("")
 
 # malejące
 for a in descendingtablisty:
-    contains("Malejace znaleziono")
+    contains("Malejace znaleziono", 'Tablica', 'Malejące', 'Contains')
 print("")
 
 # V-kształtne
 for a in vtablisty:
-    contains("V-ksztaltne znaleziono")
+    contains("V-ksztaltne znaleziono", 'Tablica', 'V-kształtne', 'Contains')
 print("")
 
 # A-kształtne
 for a in atablisty:
-    contains("A-ksztaltne znaleziono")
+    contains("A-ksztaltne znaleziono", 'Tablica', 'A-kształtne', 'Contains')
 print("")
 
 # stałe
 for a in consttablisty:
-    contains("Stale znaleziono")
+    contains("Stale znaleziono", 'Tablica', 'Stałe', 'Contains')
 print("")
 
 
 
 
 # foreach
-def forEach(a, typ):
+def forEach(a, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     for x in a:
         x += 1
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(a), sortowanie, operacja, time])
+        f_object.close()
     print(typ, len(a), time)
 
 
 # losowe
 for a in randomtabllisty:
-    forEach(a, 'Losowe')
+    forEach(a, 'Losowe', 'Tablica', 'Losowe', 'forEach')
 print("")
 
 # rosnące
 for a in ascendingtablisty:
-    forEach(a, 'Rosnace')
+    forEach(a, 'Rosnace', 'Tablica', 'Rosnące', 'forEach')
 print("")
 
 # malejące
 for a in descendingtablisty:
-    forEach(a, 'Malejace')
+    forEach(a, 'Malejace', 'Tablica', 'Malejące', 'forEach')
 print("")
 
 # V-kształtne
 for a in vtablisty:
-    forEach(a, 'V-ksztaltne')
+    forEach(a, 'V-ksztaltne', 'Tablica', 'V-kształtne', 'forEach')
 print("")
 
 # A-kształtne
 for a in atablisty:
-    forEach(a, 'A-ksztaltne')
+    forEach(a, 'A-ksztaltne', 'Tablica', 'A-kształtne', 'forEach')
 print("")
 
 # stałe
 for a in consttablisty:
-    forEach(a, 'Stale')
+    forEach(a, 'Stale', 'Tablica', 'Stałe', 'forEach')
 print("")
 
 
 
 # array odejmowanie (usuwanie)
-def removeTab(a, typ):
+def removeTab(a, typ, struktura, sortowanie, operacja):
     dlugosc = len(a)
     startTime = datetime.now()
     while len(a) > 0:
         for x in a:
             a.remove(x)
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, dlugosc, sortowanie, operacja, time])
+        f_object.close()
     print(typ, dlugosc, time)
 
 
 # losowe
 for a in randomtabllisty:
-    removeTab(a, 'Losowe')
+    removeTab(a, 'Losowe', 'Tablica', 'Losowe', 'Odejmowanie')
 print("")
 
 # rosnące
 for a in ascendingtablisty:
-    removeTab(a, 'Rosnace')
+    removeTab(a, 'Rosnace', 'Tablica', 'Rosnące', 'Odejmowanie')
 print("")
 
 # malejące
 for a in descendingtablisty:
-    removeTab(a, 'Malejace')
+    removeTab(a, 'Malejace', 'Tablica', 'Malejące', 'Odejmowanie')
 print("")
 
 # V-kształtne
 for a in vtablisty:
-    removeTab(a, 'V-ksztaltne')
+    removeTab(a, 'V-ksztaltne', 'Tablica', 'V-kształtne', 'Odejmowanie')
 print("")
 
 # A-kształtne
 for a in atablisty:
-    removeTab(a, 'A-ksztaltne')
+    removeTab(a, 'A-ksztaltne', 'Tablica', 'A-kształtne', 'Odejmowanie')
 print("")
 
 # stałe
 for a in consttablisty:
-    removeTab(a, 'Stale')
+    removeTab(a, 'Stale', 'Tablica', 'Stałe', 'Odejmowanie')
 
 
 
@@ -609,162 +631,177 @@ alllisty = [all2000, all4000, all6000, all8000, all10000, all12000, all14000, al
 constlllisty = [constll2000, constll4000, constll6000, constll8000, constll10000, constll12000, constll14000, constll16000, constll18000, constll20000]
 
 # dodawanie do listy jednostronnej (tworzenie)
-def createLL(a, listy, lllisty, typ):
+def createLL(a, listy, lllisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     for x in listy[lllisty.index(a)]:
         a.insert(x)
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[lllisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ, len(listy[lllisty.index(a)]), time)
-
 
 # losowe
 for a in randomlllisty:
-    createLL(a, randomlisty, randomlllisty, 'Losowe')
+    createLL(a, randomlisty, randomlllisty, 'Losowe', 'Lista jednokierunkowa', 'Losowe', 'Dodawanie')
 print("")
 
 # rosnące
 for a in ascendinglllisty:
-    createLL(a, ascendinglisty, ascendinglllisty, 'Rosnace')
+    createLL(a, ascendinglisty, ascendinglllisty, 'Rosnace', 'Lista jednokierunkowa', 'Rosnące', 'Dodawanie')
 print("")
 
 # malejące
 for a in descendinglllisty:
-    createLL(a, descendinglisty, descendinglllisty, 'Malejace')
+    createLL(a, descendinglisty, descendinglllisty, 'Malejace', 'Lista jednokierunkowa', 'Malejące', 'Dodawanie')
 print("")
 
 # V-kształtne
 for a in vlllisty:
-    createLL(a, vlisty, vlllisty, 'V-ksztaltne')
+    createLL(a, vlisty, vlllisty, 'V-ksztaltne', 'Lista jednokierunkowa', 'V-kształtne', 'Dodawanie')
 print("")
 
 # A-kształtne
 for a in alllisty:
-    createLL(a, alisty, alllisty, 'A-ksztaltne')
+    createLL(a, alisty, alllisty, 'A-ksztaltne', 'Lista jednokierunkowa', 'A-kształtne', 'Dodawanie')
 print("")
 
 # stałe
 for a in constlllisty:
-    createLL(a, constlisty, constlllisty, 'Stale')
+    createLL(a, constlisty, constlllisty, 'Stale', 'Lista jednokierunkowa', 'Stałe', 'Dodawanie')
 print("")
 
 
 
 # sprawdzanie czy lista jendokierunkowa zawiera podaną liczbę
-def containsLL(a, listy, llisty, typ):
+def containsLL(a, listy, llisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     a.search(listy[llisty.index(a)][random.randint(0, len(listy[llisty.index(a)]))])
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[llisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ,  len(listy[llisty.index(a)]), time)
 
 
 # losowe
 for a in randomlllisty:
-    containsLL(a, randomlisty, randomlllisty, 'Losowe')
+    containsLL(a, randomlisty, randomlllisty, 'Losowe', 'Lista jednokierunkowa', 'Losowe', 'Contains')
 print("")
 
 # rosnące
 for a in ascendinglllisty:
-    containsLL(a, ascendinglisty, ascendinglllisty, 'Rosnace')
+    containsLL(a, ascendinglisty, ascendinglllisty, 'Rosnace', 'Lista jednokierunkowa', 'Rosnące', 'Contains')
 print("")
 
 # malejące
 for a in descendinglllisty:
-    containsLL(a, descendinglisty, descendinglllisty, 'Malejace')
+    containsLL(a, descendinglisty, descendinglllisty, 'Malejace', 'Lista jednokierunkowa', 'Malejące', 'Contains')
 print("")
 
 # V-kształtne
 for a in vlllisty:
-    containsLL(a, vlisty, vlllisty, 'V-ksztaltne')
+    containsLL(a, vlisty, vlllisty, 'V-ksztaltne', 'Lista jednokierunkowa', 'V-kształtne', 'Contains')
 print("")
 
 # A-kształtne
 for a in alllisty:
-    containsLL(a, alisty, alllisty, 'A-ksztaltne')
+    containsLL(a, alisty, alllisty, 'A-ksztaltne', 'Lista jednokierunkowa', 'A-kształtne', 'Contains')
 print("")
 
 # stałe
 for a in constlllisty:
-    containsLL(a, constlisty, constlllisty, 'Stale')
+    containsLL(a, constlisty, constlllisty, 'Stale', 'Lista jednokierunkowa', 'Stałe', 'Contains')
 print("")
 
 
 
 
 # foreach
-def forEach(a, listy, llisty, typ):
+def forEach(a, listy, llisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     a.forList()
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[llisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ,  len(listy[llisty.index(a)]), time)
 
 
 # losowe
 for a in randomlllisty:
-    forEach(a, randomlisty, randomlllisty, 'Losowe')
+    forEach(a, randomlisty, randomlllisty, 'Losowe', 'Lista jednokierunkowa', 'Losowe', 'forEach')
 print("")
 
 # rosnące
 for a in ascendinglllisty:
-    forEach(a, ascendinglisty, ascendinglllisty, 'Rosnace')
+    forEach(a, ascendinglisty, ascendinglllisty, 'Rosnace', 'Lista jednokierunkowa', 'Rosnące', 'forEach')
 print("")
 
 # malejące
 for a in descendinglllisty:
-    forEach(a, descendinglisty, descendinglllisty, 'Malejace')
+    forEach(a, descendinglisty, descendinglllisty, 'Malejace', 'Lista jednokierunkowa', 'Malejące', 'forEach')
 print("")
 
 # V-kształtne
 for a in vlllisty:
-    forEach(a, vlisty, vlllisty, 'V-ksztaltne')
+    forEach(a, vlisty, vlllisty, 'V-ksztaltne', 'Lista jednokierunkowa', 'V-kształtne', 'forEach')
 print("")
 
 # A-kształtne
 for a in alllisty:
-    forEach(a, alisty, alllisty, 'A-ksztaltne')
+    forEach(a, alisty, alllisty, 'A-ksztaltne', 'Lista jednokierunkowa', 'A-kształtne', 'forEach')
 print("")
 
 # stałe
 for a in constlllisty:
-    forEach(a, constlisty, constlllisty, 'Stale')
+    forEach(a, constlisty, constlllisty, 'Stale', 'Lista jednokierunkowa', 'Stałe', 'forEach')
 print("")
 
 
 # lista jednokierunkowa odejmowanie (usuwanie)
-def removeList(a, listy, llisty, typ):
+def removeList(a, listy, llisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     a.remove()
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[llisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ,  len(listy[llisty.index(a)]), time)
 
 
 # losowe
 for a in randomlllisty:
-    removeList(a, randomlisty, randomlllisty, 'Losowe')
+    removeList(a, randomlisty, randomlllisty, 'Losowe', 'Lista jednokierunkowa', 'Losowe', 'Odejmowanie')
 print("")
 
 # rosnące
 for a in ascendinglllisty:
-    removeList(a, ascendinglisty, ascendinglllisty, 'Rosnace')
+    removeList(a, ascendinglisty, ascendinglllisty, 'Rosnace', 'Lista jednokierunkowa', 'Rosnące', 'Odejmowanie')
 print("")
 
 # malejące
 for a in descendinglllisty:
-    removeList(a, descendinglisty, descendinglllisty, 'Malejace')
+    removeList(a, descendinglisty, descendinglllisty, 'Malejace', 'Lista jednokierunkowa', 'Malejące', 'Odejmowanie')
 print("")
 
 # V-kształtne
 for a in vlllisty:
-    removeList(a, vlisty, vlllisty, 'V-ksztaltne')
+    removeList(a, vlisty, vlllisty, 'V-ksztaltne', 'Lista jednokierunkowa', 'V-kształtne', 'Odejmowanie')
 print("")
 
 # A-kształtne
 for a in alllisty:
-    removeList(a, alisty, alllisty, 'A-ksztaltne')
+    removeList(a, alisty, alllisty, 'A-ksztaltne', 'Lista jednokierunkowa', 'A-kształtne', 'Odejmowanie')
 print("")
 
 # stałe
 for a in constlllisty:
-    removeList(a, constlisty, constlllisty, 'Stale')
+    removeList(a, constlisty, constlllisty, 'Stale', 'Lista jednokierunkowa', 'Stałe', 'Odejmowanie')
 print("")
 
 
@@ -929,156 +966,174 @@ consttreelisty = [consttree2000, consttree4000, consttree6000, consttree8000, co
 
 
 # dodawanie
-def createTree(a, listy, tlisty, typ):
+def createTree(a, listy, tlisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     for x in listy[tlisty.index(a)]:
         a.insert(x)
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[tlisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ, len(listy[tlisty.index(a)]), time)
 
 # losowe
 for a in randomtreelisty:
-    createTree(a, randomlisty, randomtreelisty, 'Losowe')
+    createTree(a, randomlisty, randomtreelisty, 'Losowe', 'Drzewo', 'Losowe', 'Dodawanie')
 print("")
 
 # rosnące
 for a in ascendingtreelisty:
-    createTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+    createTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace', 'Drzewo', 'Rosnące', 'Dodawanie')
 print("")
 
 # malejące
 for a in descendingtreelisty:
-    createTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+    createTree(a, descendinglisty, descendingtreelisty, 'Malejace', 'Drzewo', 'Malejące', 'Dodawanie')
 print("")
 
 # V-kształtne
 for a in vtreelisty:
-    createTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+    createTree(a, vlisty, vtreelisty, 'V-ksztaltne', 'Drzewo', 'V-kształtne', 'Dodawanie')
 print("")
 
 # A-kształtne
 for a in atreelisty:
-    createTree(a, alisty, atreelisty, 'A-ksztaltne')
+    createTree(a, alisty, atreelisty, 'A-ksztaltne', 'Drzewo', 'A-kształtne', 'Dodawanie')
 print("")
 
 # stałe
 for a in consttreelisty:
-    createTree(a, constlisty, consttreelisty, 'Stale')
+    createTree(a, constlisty, consttreelisty, 'Stale', 'Drzewo', 'Stałe', 'Dodawanie')
 print("")
 
 
 
 # sprawdzanie czy zawiera daną liczbę
-def containsTree(a, listy, tlisty, typ):
+def containsTree(a, listy, tlisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     a.search(listy[tlisty.index(a)][random.randint(0, len(listy[tlisty.index(a)]))])
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[tlisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ,  len(listy[tlisty.index(a)]), time, a.search(5))
 
 # losowe
 for a in randomtreelisty:
-    containsTree(a, randomlisty, randomtreelisty, 'Losowe')
+    containsTree(a, randomlisty, randomtreelisty, 'Losowe', 'Drzewo', 'Losowe', 'Contains')
 print("")
 
 # rosnące
 for a in ascendingtreelisty:
-    containsTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+    containsTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace', 'Drzewo', 'Rosnące', 'Contains')
 print("")
 
 # malejące
 for a in descendingtreelisty:
-    containsTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+    containsTree(a, descendinglisty, descendingtreelisty, 'Malejace', 'Drzewo', 'Malejące', 'Contains')
 print("")
 
 # V-kształtne
 for a in vtreelisty:
-    containsTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+    containsTree(a, vlisty, vtreelisty, 'V-ksztaltne', 'Drzewo', 'V-kształtne', 'Contains')
 print("")
 
 # A-kształtne
 for a in atreelisty:
-    containsTree(a, vlisty, atreelisty, 'A-ksztaltne')
+    containsTree(a, vlisty, atreelisty, 'A-ksztaltne', 'Drzewo', 'A-kształtne', 'Contains')
 print("")
 
 # stałe
 for a in consttreelisty:
-    containsTree(a, constlisty, consttreelisty, 'Stale')
+    containsTree(a, constlisty, consttreelisty, 'Stale', 'Drzewo', 'Stałe', 'Contains')
 print("")
 
 
 # foreach
-
-def forEachTree(a, listy, tlisty, typ):
+def forEachTree(a, listy, tlisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     a.forEach([])
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[tlisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ, len(listy[tlisty.index(a)]), time)
 
 # losowe
 for a in randomtreelisty:
-    forEachTree(a, randomlisty, randomtreelisty, 'Losowe')
+    forEachTree(a, randomlisty, randomtreelisty, 'Losowe', 'Drzewo', 'Losowe', 'forEach')
 print("")
 
 # rosnące
 for a in ascendingtreelisty:
-    forEachTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+    forEachTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace', 'Drzewo', 'Rosnące', 'forEach')
 print("")
 
 # malejące
 for a in descendingtreelisty:
-    forEachTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+    forEachTree(a, descendinglisty, descendingtreelisty, 'Malejace', 'Drzewo', 'Malejące', 'forEach')
 print("")
 
 # V-kształtne
 for a in vtreelisty:
-    forEachTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+    forEachTree(a, vlisty, vtreelisty, 'V-ksztaltne', 'Drzewo', 'V-kształtne', 'forEach')
 print("")
 
 # A-kształtne
 for a in atreelisty:
-    forEachTree(a, vlisty, atreelisty, 'A-ksztaltne')
+    forEachTree(a, vlisty, atreelisty, 'A-ksztaltne', 'Drzewo', 'A-kształtne', 'forEach')
 print("")
 
 # stałe
 for a in consttreelisty:
-    forEachTree(a, constlisty, consttreelisty, 'Stale')
+    forEachTree(a, constlisty, consttreelisty, 'Stale', 'Drzewo', 'Stałe', 'forEach')
 print("")
 
 
 # odejmowanie (usuwanie)
-def deleteTree(a, listy, tlisty, typ):
+def deleteTree(a, listy, tlisty, typ, struktura, sortowanie, operacja):
     startTime = datetime.now()
     for x in listy[tlisty.index(a)]:
         a.delete(x)
     time =  datetime.now() - startTime
+    with open('wynikstruktury.csv', 'a', newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow([struktura, len(listy[tlisty.index(a)]), sortowanie, operacja, time])
+        f_object.close()
     print(typ, len(listy[tlisty.index(a)]), time)
 
 # losowe
 for a in randomtreelisty:
-    deleteTree(a, randomlisty, randomtreelisty, 'Losowe')
+    deleteTree(a, randomlisty, randomtreelisty, 'Losowe', 'Drzewo', 'Losowe', 'Odejmowanie')
 print("")
 
 # rosnące
 for a in ascendingtreelisty:
-    deleteTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace')
+    deleteTree(a, ascendinglisty, ascendingtreelisty, 'Rosnace', 'Drzewo', 'Rosnące', 'Odejmowanie')
 print("")
 
 # malejące
 for a in descendingtreelisty:
-    deleteTree(a, descendinglisty, descendingtreelisty, 'Malejace')
+    deleteTree(a, descendinglisty, descendingtreelisty, 'Malejace', 'Drzewo', 'Malejące', 'Odejmowanie')
 print("")
 
 # V-kształtne
 for a in vtreelisty:
-    deleteTree(a, vlisty, vtreelisty, 'V-ksztaltne')
+    deleteTree(a, vlisty, vtreelisty, 'V-ksztaltne', 'Drzewo', 'V-kształtne', 'Odejmowanie')
 print("")
 
 # A-kształtne
 for a in atreelisty:
-    deleteTree(a, vlisty, atreelisty, 'A-ksztaltne')
+    deleteTree(a, vlisty, atreelisty, 'A-ksztaltne', 'Drzewo', 'A-kształtne', 'Odejmowanie')
 print("")
 
 # stałe
 for a in consttreelisty:
-    deleteTree(a, constlisty, consttreelisty, 'Stale')
+    deleteTree(a, constlisty, consttreelisty, 'Stale', 'Drzewo', 'Stałe', 'Odejmowanie')
 print("")
+
+# wypisuje jak długo wykonywał się program
+print("Calosc zajela: ", datetime.now() - startTimeFull)
